@@ -1,7 +1,7 @@
 <template>
   <!-- Element Plus 菜单组件 -->
   <el-menu
-    :style="{ width: '230px' }"
+    :style="{ width: isCollapse ? '64px' : '230px' }"
     active-text-color="#ffd04b"
     background-color="#545c64"
     class="aside-container"
@@ -11,7 +11,7 @@
     @close="handleClose"
     :collapse="isCollapse">
     <!-- Logo 标题 -->
-    <p class="logo-title">DIDI陪诊</p>
+    <p class="logo-title">{{ isCollapse ? "DIDI" : "DIDI陪诊" }}</p>
     <!-- TreeMenu 组件，用于显示层级菜单 -->
     <!-- :index="1"：传递给 TreeMenu 组件的初始索引 -->
     <!-- :menuData="menuData"：传递给 TreeMenu 组件的菜单数据 -->

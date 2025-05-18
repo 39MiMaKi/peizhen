@@ -6,7 +6,8 @@
       @click="handleClick(item, `${props.index}-${item.meta.id}`)"
       v-if="!item.children || item.children.length == 0"
       :index="`${props.index}-${item.meta.id}`"
-      :key="`${props.index}-${item.meta.id}`">
+      :key="`${props.index}-${item.meta.id}`"
+    >
       <!-- Element Plus 图标组件 -->
       <el-icon size="20">
         <!-- 动态组件，根据 item.meta.icon 的值渲染对应的图标 -->
@@ -31,13 +32,15 @@
       <!-- :menuData: 传递子菜单数据 -->
       <tree-menu
         :index="`${props.index}-${item.meta.id}`"
-        :menuData="item.children" />
+        :menuData="item.children"
+      />
     </el-sub-menu>
   </template>
 </template>
 
 <script setup>
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 // 使用 defineProps 获取父组件传递过来的数据
 // props.menuData: 菜单数据数组
 // props.index: 当前菜单的索引，用于生成唯一的 key 和 index
@@ -46,10 +49,12 @@ const props = defineProps(["menuData", "index"]);
 
 // 创建router实例
 const router = useRouter();
+const store = useStore();
+
 // 点击菜单
 const handleClick = (item, active) => {
-  console.log(item, "item");
-
+  // console.log(item, "item");
+  store.commit("addMenu", item.meta);
   router.push(item.meta.path);
 };
 </script>
